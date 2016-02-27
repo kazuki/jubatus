@@ -77,7 +77,7 @@ def configure(conf):
   conf.env.ABI_VERSION = ABI_VERSION
   conf.env.JUBATUS_ENGINES = JUBATUS_ENGINES
 
-  conf.check_cxx(lib = 'msgpack')
+  conf.check_cxx(header_name = 'msgpack.hpp')
   conf.check_cxx(lib = 'jubatus_mpio')
   conf.check_cxx(lib = 'jubatus_msgpack-rpc')
   conf.check_cxx(lib = 'dl')

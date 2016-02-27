@@ -7,4 +7,4 @@ Name: @PACKAGE@
 Description: Client Library for Distributed Online Machine Learning
 Version: @VERSION@
 Cflags: -I${includedir}
-Libs: -L${libdir} -lmsgpack -ljubatus_mpio -ljubatus_msgpack-rpc
+Libs: -L${libdir} -ljubatus_mpio -ljubatus_msgpack-rpc

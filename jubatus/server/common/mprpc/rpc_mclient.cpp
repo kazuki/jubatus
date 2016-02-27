@@ -72,7 +72,8 @@ rpc_response_t rpc_mclient::wait_one(
 
 std::string create_error_string(const msgpack::object& error) {
   switch (error.type) {
-    case msgpack::type::RAW:
+    case msgpack::type::STR:
+    case msgpack::type::BIN:
       return error.as<std::string>();
 
     case msgpack::type::POSITIVE_INTEGER:

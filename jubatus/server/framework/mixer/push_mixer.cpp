@@ -383,7 +383,7 @@ void push_mixer::mix() {
         push(her_diff);
 
         // count size
-        s_pull += her_diff.via.raw.size;
+        s_pull += her_diff.via.bin.size;
         s_push += my_diff.size();
       }
       if (candidates.size() == 0U) {
@@ -408,11 +408,11 @@ void push_mixer::mix() {
 }
 
 byte_buffer push_mixer::pull(const msgpack::object& arg_obj) {
-  if (arg_obj.type != msgpack::type::RAW) {
+  if (arg_obj.type != msgpack::type::BIN) {
     throw msgpack::rpc::argument_error();
   }
   msgpack::unpacked msg;
-  msgpack::unpack(&msg, arg_obj.via.raw.ptr, arg_obj.via.raw.size);
+  msgpack::unpack(&msg, arg_obj.via.bin.ptr, arg_obj.via.bin.size);
   msgpack::object arg = msg.get();
 
   scoped_rlock lk_read(model_mutex_);
@@ -447,12 +447,12 @@ byte_buffer push_mixer::get_pull_argument(int dummy_arg) {
 }
 
 int push_mixer::push(const msgpack::object& diff_obj) {
-  if (diff_obj.type != msgpack::type::RAW) {
+  if (diff_obj.type != msgpack::type::BIN) {
     throw msgpack::rpc::argument_error();
   }
 
   msgpack::unpacked msg;
-  msgpack::unpack(&msg, diff_obj.via.raw.ptr, diff_obj.via.raw.size);
+  msgpack::unpack(&msg, diff_obj.via.bin.ptr, diff_obj.via.bin.size);
   msgpack::object diff = msg.get();
 
   scoped_wlock lk_write(model_mutex_);

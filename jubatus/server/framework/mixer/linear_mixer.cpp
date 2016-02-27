@@ -464,12 +464,12 @@ void linear_mixer::mix() {
           }
 
           msgpack::object res = diff_result.response[i]();
-          if (res.type != msgpack::type::RAW) {
+          if (res.type != msgpack::type::BIN) {
             continue;
           }
 
           msgpack::unpacked msg;
-          msgpack::unpack(&msg, res.via.raw.ptr, res.via.raw.size);
+          msgpack::unpack(&msg, res.via.bin.ptr, res.via.bin.size);
           msgpack::object o = msg.get();
 
           diffs++;
